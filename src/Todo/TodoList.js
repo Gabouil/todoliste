@@ -5,17 +5,21 @@ class TodoList extends Component {
         super();
         this.state = {
 
-            userInput: '',
+            serInpuut: '',
             items: []
         }
     }
 
+
+    // récupérastion du contenu du array
     onChange(event){
         this.setState({
             userInput: event.target.value
         })
     }
 
+
+    //envoie du array dans la liste des taches
     addTodo(event) {
         event.preventDefault();
         this.setState({
@@ -24,6 +28,7 @@ class TodoList extends Component {
         })
     }
 
+    // suppresion d'une tache
     deleteTodo(item) {
         const array = this.state.items
         const index = array.indexOf(item)
@@ -32,9 +37,9 @@ class TodoList extends Component {
             items: array
         })
     }
-    validationTodo(item) {
-    }
 
+
+    // affichage de la liste des taches
     renderTodo() {
         return this.state.items.map((item) => {
             return (
@@ -48,6 +53,8 @@ class TodoList extends Component {
         })
     }
 
+
+    // affichage du contenu de la page
     render() {
         return(
             <div class="app-container d-flex align-items-center justify-content-around flex-column">
