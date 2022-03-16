@@ -1,81 +1,70 @@
-import React, { Component } from "react"
+import React, { Component, useState } from "react"
+import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID"
 
-class TodoList extends Component {
-    constructor() {
-        super();
-        this.state = {
 
-            serInpuut: '',
-            items: []
-        }
+function TodoList() {
+    const [inputTitel, setinputTitel] = useState('')
+    const [inputeDesc, setinputDesc] = useState('')
+    const [items, setitems] = useState([])
+
+    const addTodo = (e) => {
+        e.preventDefault()
+        let id = generateUniqueID()
+        setitems([...items, [inputTitel,inputeDesc, id]])
+        setinputDesc('')
+        setinputTitel('')
+    };
+    const deleteTodo = (item) => {
+        let newlist = items.filter(e => e[2] != item[2])
+        setitems(newlist)
     }
 
 
-    // récupérastion du contenu du array
-    onChange(event){
-        this.setState({
-            userInput: event.target.value
-        })
-    }
-
-
-    //envoie du array dans la liste des taches
-    addTodo(event) {
-        event.preventDefault();
-        this.setState({
-            items: [...this.state.items, this.state.userInput],
-            userInput: ''
-        })
-    }
-
-    // suppresion d'une tache
-    deleteTodo(item) {
-        const array = this.state.items
-        const index = array.indexOf(item)
-        array.splice(index, 1)
-        this.setState({
-            items: array
-        })
-    }
-
-
-    // affichage de la liste des taches
-    renderTodo() {
-        return this.state.items.map((item) => {
-            return (
-                
-                <div class="d-flex align-items-center justify-content-between mb-2" key={item}>
-                    <input type="checkbox" class="btn-check" id={item} autocomplete="off" />
-                    <label class="btn btn-outline-success w-100" for={item}>{item}</label>
-                    <button class="btn btn-danger ml-2" onClick={this.deleteTodo.bind(this, item)}>Supprimer</button>
-                </div>
-            )
-        })
-    }
-
-
-    // affichage du contenu de la page
-    render() {
-        return(
-            <div class="app-container d-flex align-items-center justify-content-around flex-column">
-                <h1>Ma todo list</h1>
-                <form class="d-flex align-items-center mb-3">
-                    <input 
-                        value={this.state.userInput}
-                        type="test"
-                        placeholder="Votre tache"
-                        onChange={this.onChange.bind(this)}
-                        class="form-control mr-2"
-                    />
-                    <button class="btn btn-primary mr-3" onClick={this.addTodo.bind(this)}>Ajouter</button>
-                </form>
-
-                <div className="list-group w-50">
-                    {this.renderTodo()}
+    return(
+        <div class="app-container d-flex align-items-center justify-content-around flex-column">
+            <h1>Ma todo list</h1>
+            <form class="d-flex align-items-center mb-5 flex-column w-50">
+                <input 
+                    value={inputTitel}
+                    type="test"
+                    placeholder="Titre"
+                    onChange={e => (setinputTitel(e.target.value))}
+                    class="form-control mb-2"
+                />
+                <input 
+                    value={inputeDesc}
+                    type="test"
+                    placeholder="Tache"
+                    onChange={e => (setinputDesc(e.target.value))}
+                    class="form-control mb-2"
+                />
+                <button id="addToTodo" class="btn btn-primary" onClick={addTodo}>Ajouter</button>
+            </form>
+            <div class="list-group w-50 btn border border-secondary mb-5">
+                <div class="d-flex flex-column align-items-center justify-content-between mb-4" key='preview'>
+                    <div class="d-flex flex-column align-items-center justify-content-between mb-2">
+                        <h1 class="w-100 h-25">{inputTitel}</h1>
+                        <p class="w-100 h-75">{inputeDesc}</p>
+                    </div>
                 </div>
             </div>
-        );
-    }
+            <div className="list-group w-50">
+                <div>{items.map(item =>
+                    <div class="d-flex flex-column align-items-center justify-content-between mb-4" key={item[2]}>
+                        <input type="checkbox" class="btn-check" id={item[2]} autocomplete="off" />
+                        <label class="btn btn-outline-success w-100 mb-2" for={item[2]}>
+                            <div class="d-flex flex-column align-items-center justify-content-between mb-2">
+                                <h1 class="w-100 h-25">{item[0]}</h1>
+                                <p class="w-100 h-75">{item[1]}</p>
+                            </div>
+                        </label>
+                        <button class="btn btn-danger ml-2" onClick={() => deleteTodo(item)}>Supprimer</button>
+                    </div>
+                )}</div>
+            </div>
+        </div>
+    )
 }
+
 
 export default TodoList;
