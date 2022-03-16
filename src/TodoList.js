@@ -21,8 +21,8 @@ function TodoList() {
 
 
     return(
-        <div class="app-container d-flex align-items-center justify-content-around flex-column">
-            <h1>Ma todo list</h1>
+        <div class="app-container d-flex align-items-center justify-content-around flex-column text-center">
+            <h1>Nouvelle tache</h1>
             <form class="d-flex align-items-center mb-5 flex-column w-50">
                 <input 
                     value={inputTitel}
@@ -40,6 +40,7 @@ function TodoList() {
                 />
                 <button id="addToTodo" class="btn btn-primary" onClick={addTodo}>Ajouter</button>
             </form>
+            <h1>Preview</h1>
             <div class="list-group w-50 btn border border-secondary mb-5">
                 <div class="d-flex flex-column align-items-center justify-content-between mb-4" key='preview'>
                     <div class="d-flex flex-column align-items-center justify-content-between mb-2">
@@ -49,6 +50,7 @@ function TodoList() {
                 </div>
             </div>
             <div className="list-group w-50">
+                <h1>Tache à faire</h1>
                 <div>{items.map(item =>
                     <div class="d-flex flex-column align-items-center justify-content-between mb-4" key={item[2]}>
                         <input type="checkbox" class="btn-check" id={item[2]} autocomplete="off" />
