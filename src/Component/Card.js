@@ -6,10 +6,14 @@ export default function Card({title, desc, ID, status, items, setitems}) {
     const [modifDesc, setmodifDesc] = useState(desc)
 
 
+
+    // supprimer la taghce
     const deleteTodo = () => {
         let newlist = items.filter(e => e.ID != ID)
         setitems(newlist)
     }
+
+    // valider ou non la tache
     const handleStatus = () => {
         switch(status) {
             case true:
@@ -27,6 +31,8 @@ export default function Card({title, desc, ID, status, items, setitems}) {
         })
         setitems(newlist)
     }
+
+    // modifier ou non la tache
     const changeCard = () => {
         switch(modifCard) {
             case true:
@@ -36,9 +42,13 @@ export default function Card({title, desc, ID, status, items, setitems}) {
                 setmodifCard(true)
                 break
         }
+
+        // annulation des modification
         setmodifTitle(title)
         setmodifDesc(desc)
     }
+
+    // envoi des modification de la tache
     const changeTodo = (e) => {
         e.preventDefault()
         title = modifTitle
@@ -54,6 +64,8 @@ export default function Card({title, desc, ID, status, items, setitems}) {
 
     };
 
+
+    // affichache de la tache ou du form de modification
     const handleChangeCard = () => {
         if(modifCard == true) {
             return(
@@ -86,6 +98,8 @@ export default function Card({title, desc, ID, status, items, setitems}) {
             )
         }
     }
+    
+
     
     return (
         <div className="d-flex flex-column align-items-center justify-content-between mb-4" key={ID}>

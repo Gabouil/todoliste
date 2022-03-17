@@ -10,6 +10,8 @@ export default function TodoList() {
     const [inputeDesc, setinputDesc] = useState('')
     const [items, setitems] = useState([])
 
+
+    // ajout d'une nouvelle tache
     const addTodo = (e) => {
         e.preventDefault()
         let id = generateUniqueID()
