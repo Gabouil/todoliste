@@ -106,7 +106,7 @@ export default function Card({title, desc, ID, status, items, setitems}) {
             <div className={`${status ? "btn-success" : "btn-warning"} btn w-100 mb-2 d-flex align-items-center justify-content-center position-relative`} htmlFor={ID}>
                 {handleChangeCard()}
                 <div className="w-25 position-absolute end-0">
-                    <button className="btn w-25" onClick={() => changeCard()}>
+                    <button className="btn w-50" onClick={() => changeCard()}>
                         <img className="w-100" src="https://upload.wikimedia.org/wikipedia/commons/5/57/Noun_project_-_crayon.svg"/>
                     </button>
                 </div>
