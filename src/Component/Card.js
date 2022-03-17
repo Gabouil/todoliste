@@ -1,4 +1,6 @@
 import React, { Component, useState } from "react"
+import ContentCard from "./Content/ContentCard"
+import ModifCard from "./Form/ModifCard"
 
 export default function Card({title, desc, ID, status, items, setitems}) {
     const [modifCard, setmodifCard] = useState(false)
@@ -15,17 +17,10 @@ export default function Card({title, desc, ID, status, items, setitems}) {
 
     // valider ou non la tache
     const handleStatus = () => {
-        switch(status) {
-            case true:
-                status =false
-                break
-            case false:
-                status = true
-                break
-        }
+        const newStatus = status ? false : true
         let newlist = items.map(e => {
             if(e.ID == ID) {
-                return {...e, status: status}
+                return {...e, status: newStatus}
             }
             return e;
         })
@@ -69,32 +64,11 @@ export default function Card({title, desc, ID, status, items, setitems}) {
     const handleChangeCard = () => {
         if(modifCard == true) {
             return(
-                <div className="d-flex flex-column align-items-center justify-content-between mb-3">
-                    <form className="d-flex align-items-center  flex-column">
-                        <input 
-                            value={modifTitle}
-                            type="test"
-                            placeholder="modifier le titre"
-                            onChange={e => (setmodifTitle(e.target.value))}
-                            className="form-control mb-2"
-                        />
-                        <input 
-                            value={modifDesc}
-                            type="test"
-                            placeholder="modifier la tache"
-                            onChange={(e => (setmodifDesc(e.target.value)))}
-                            className="form-control mb-2"
-                        />
-                        <button id="changeTodo" className="btn btn-primary" onClick={changeTodo}>Changer</button>
-                    </form>
-                </div>
+                <ModifCard modifTitle={modifTitle} modifDesc={modifDesc} setmodifTitle={setmodifTitle} setmodifDesc={setmodifDesc} changeTodo={changeTodo} />
             )
         } else {
             return (
-                <div className="d-flex flex-column align-items-center justify-content-between mb-3">
-                    <h1 className="w-100 h-25">{title}</h1>
-                    <p className="w-100 h-75">{desc}</p>
-                </div>
+                <ContentCard title={title} desc={desc}/>
             )
         }
     }

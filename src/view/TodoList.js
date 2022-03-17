@@ -2,7 +2,9 @@ import React, { Component, useState } from "react"
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID"
 
 
-import Card from './Card'
+import Card from '../Component/Card'
+import NewCard from '../Component/Form/NewCard'
+import PreviewNewCard from "../Component/Preview/PreviewNewCard"
 
 
 export default function TodoList() {
@@ -24,32 +26,9 @@ export default function TodoList() {
     return(
         <div className="app-container d-flex align-items-center justify-content-around flex-column text-center">
             <h1>Nouvelle tache</h1>
-            <form className="d-flex align-items-center mb-5 flex-column w-50">
-                <input 
-                    value={inputTitle}
-                    type="test"
-                    placeholder="Titre"
-                    onChange={e => (setinputTitle(e.target.value))}
-                    className="form-control mb-2"
-                />
-                <input 
-                    value={inputeDesc}
-                    type="test"
-                    placeholder="Tache"
-                    onChange={e => (setinputDesc(e.target.value))}
-                    className="form-control mb-2"
-                />
-                <button id="addToTodo" className="btn btn-primary" onClick={addTodo}>Ajouter</button>
-            </form>
+            <NewCard inputTitle={inputTitle} inputeDesc={inputeDesc} setinputDesc={setinputDesc} setinputTitle={setinputTitle} addTodo={addTodo}/>
             <h1>Preview</h1>
-            <div className="list-group w-50 btn border border-secondary mb-5">
-                <div className="d-flex flex-column align-items-center justify-content-between mb-4" key='preview'>
-                    <div className="d-flex flex-column align-items-center justify-content-between mb-2">
-                        <h1 className="w-100 h-25">{inputTitle}</h1>
-                        <p className="w-100 h-75">{inputeDesc}</p>
-                    </div>
-                </div>
-            </div>
+            <PreviewNewCard inputTitle={inputTitle} inputeDesc={inputeDesc} />
             <div className="w-75 d-flex justify-content-between gap-2">
                 <div className="list-group w-50">
                     <h1>Tache à faire</h1>
