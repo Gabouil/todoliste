@@ -16,10 +16,12 @@ export default function TodoList() {
     // ajout d'une nouvelle tache
     const addTodo = (e) => {
         e.preventDefault()
-        let id = generateUniqueID()
-        setitems([...items, {title:inputTitle,desc:inputeDesc, ID:id, status:false}])
-        setinputDesc('')
-        setinputTitle('')
+        if(limitItem == false) {
+            let id = generateUniqueID()
+            setitems([...items, {title:inputTitle,desc:inputeDesc, ID:id, status:false}])
+            setinputDesc('')
+            setinputTitle('')
+        }
     };
 
     useEffect(() => {
@@ -37,7 +39,8 @@ export default function TodoList() {
     return(
         <div className="app-container d-flex align-items-center justify-content-around flex-column text-center">
             <h1>Nouvelle tache</h1>
-            {limitItem ? "Trop de tache en cour !" : <NewCard inputTitle={inputTitle} inputeDesc={inputeDesc} setinputDesc={setinputDesc} setinputTitle={setinputTitle} addTodo={addTodo}/>}
+            <NewCard inputTitle={inputTitle} inputeDesc={inputeDesc} setinputDesc={setinputDesc} setinputTitle={setinputTitle} addTodo={addTodo}/>
+            {limitItem ? <div className="alert alert-danger">Il vous faut finir des taches pour en mettre de nouvelles.</div> : ""}
             <h1>Preview</h1>
             <PreviewNewCard inputTitle={inputTitle} inputeDesc={inputeDesc} />
             <div className="w-75 d-flex justify-content-between gap-2">
