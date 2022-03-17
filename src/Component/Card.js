@@ -2,6 +2,8 @@ import React, { Component, useState } from "react"
 
 export default function Card({title, desc, ID, status, items, setitems}) {
     const [modifCard, setmodifCard] = useState(false)
+    const [modifTitle, setmodifTitle] = useState(title)
+    const [modifDesc, setmodifDesc] = useState(desc)
 
 
     const deleteTodo = () => {
@@ -34,31 +36,13 @@ export default function Card({title, desc, ID, status, items, setitems}) {
                 setmodifCard(true)
                 break
         }
-    }
-    const dinamiqueValueTitle = (e) => {
-        e.preventDefault()
-        title = e.target.value
-        let newlist = items.map(e => {
-            if(e.ID == ID) {
-                return {...e, title: title}
-            }
-            return e;
-        })
-        setitems(newlist)
-    }
-    const dinamiqueValueDesc = (e) => {
-        e.preventDefault()
-        desc = e.target.value
-        let newlist = items.map(e => {
-            if(e.ID == ID) {
-                return {...e, desc: desc}
-            }
-            return e;
-        })
-        setitems(newlist)
+        setmodifTitle(title)
+        setmodifDesc(desc)
     }
     const changeTodo = (e) => {
         e.preventDefault()
+        title = modifTitle
+        desc = modifDesc
         let newlist = items.map(e => {
             if(e.ID == ID) {
                 return {...e, desc: desc, title: title}
@@ -76,17 +60,17 @@ export default function Card({title, desc, ID, status, items, setitems}) {
                 <div className="d-flex flex-column align-items-center justify-content-between mb-3">
                     <form className="d-flex align-items-center  flex-column">
                         <input 
-                            value={title}
+                            value={modifTitle}
                             type="test"
                             placeholder="modifier le titre"
-                            onChange={e => (dinamiqueValueTitle(e))}
+                            onChange={e => (setmodifTitle(e.target.value))}
                             className="form-control mb-2"
                         />
                         <input 
-                            value={desc}
+                            value={modifDesc}
                             type="test"
                             placeholder="modifier la tache"
-                            onChange={(e => (dinamiqueValueDesc(e)))}
+                            onChange={(e => (setmodifDesc(e.target.value)))}
                             className="form-control mb-2"
                         />
                         <button id="changeTodo" className="btn btn-primary" onClick={changeTodo}>Changer</button>
@@ -106,7 +90,6 @@ export default function Card({title, desc, ID, status, items, setitems}) {
     return (
         <div className="d-flex flex-column align-items-center justify-content-between mb-4" key={ID}>
             <div className={`${status ? "btn-success" : "btn-warning"} btn w-100 mb-2 d-flex align-items-center justify-content-center position-relative`} htmlFor={ID}>
-                
                 {handleChangeCard()}
                 <div className="w-25 position-absolute end-0">
                     <button className="btn w-25" onClick={() => changeCard()}>
