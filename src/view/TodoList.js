@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react"
+import React, { Component, useEffect, useState } from "react"
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID"
 
 
@@ -11,7 +11,7 @@ export default function TodoList() {
     const [inputTitle, setinputTitle] = useState('')
     const [inputeDesc, setinputDesc] = useState('')
     const [items, setitems] = useState([])
-
+    const [limitItem, setlimitItem] = useState(false)
 
     // ajout d'une nouvelle tache
     const addTodo = (e) => {
@@ -22,11 +22,22 @@ export default function TodoList() {
         setinputTitle('')
     };
 
+    useEffect(() => {
+        countTodo()
+      }, [items])
+      
+    const countTodo = () => {
+        if(items.filter(e => e.status == false).length >= 10){
+            setlimitItem(true)
+        } else {
+            setlimitItem(false)
+        }
+    };
 
     return(
         <div className="app-container d-flex align-items-center justify-content-around flex-column text-center">
             <h1>Nouvelle tache</h1>
-            <NewCard inputTitle={inputTitle} inputeDesc={inputeDesc} setinputDesc={setinputDesc} setinputTitle={setinputTitle} addTodo={addTodo}/>
+            {limitItem ? "Trop de tache en cour !" : <NewCard inputTitle={inputTitle} inputeDesc={inputeDesc} setinputDesc={setinputDesc} setinputTitle={setinputTitle} addTodo={addTodo}/>}
             <h1>Preview</h1>
             <PreviewNewCard inputTitle={inputTitle} inputeDesc={inputeDesc} />
             <div className="w-75 d-flex justify-content-between gap-2">
