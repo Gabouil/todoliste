@@ -55,7 +55,7 @@ export default function TodoList() {
             )}</div>
             <h1>Tache faite</h1>
             <div>{items.filter(e => e.status==true).map(item =>
-                <Card key={item.ID} title={item.title} desc={item.desc} ID={item.ID} status={item.status} items={items} setitems={setitems}/>
+                <Card title={item.title} desc={item.desc} ID={item.ID} status={item.status} items={items} setitems={setitems}/>
             )}</div>
 
             </div>
