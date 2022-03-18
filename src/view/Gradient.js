@@ -8,6 +8,9 @@ export default function Gradient() {
     const [colorsList, setcolorsList] = useState([{id:1,hexa:"#c173c1"},{id:2,hexa:"#f39d9e"},{id:3,hexa:"#317c04"}])
     const [deg, setdeg] = useState(300)
     const [type, settype] = useState(true)
+    const [alert, setalert] = useState(false)
+    const gradient = type ? "linear-gradient(" + deg + "deg, " + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )"
+                            :"radial-gradient(" + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )"
 
     // const [gradientBackground, setgradientBackground] = useState(colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa)
 
@@ -32,20 +35,20 @@ export default function Gradient() {
         setcolorsList([{id:1,hexa:`${value1}`},{id:2,hexa:`${value2}`},{id:3,hexa:`${value3}`}])
     }
 
+    const copieCode = (e) => {
+        e.preventDefault()
+        navigator.clipboard.writeText(gradient)
+        setalert(true)
+        setTimeout(() => {
+            setalert(false)
+        }, 1000);
+    }
+
 
 
 
     return(
-        <div    className="w-100 d-flex align-items-center justify-content-center flex-column" style={{ height: "100vh",
-                                                                                                        background: type ?
-                                                                                                        "linear-gradient(" + deg + "deg, " + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )" :
-                                                                                                        "radial-gradient(" + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )", 
-                                                                                                        background: type ?
-                                                                                                        "-moz-linear-gradient(" + deg + "deg, " + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )" :
-                                                                                                        "-moz-radial-gradient(" + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )",
-                                                                                                        background: type ?
-                                                                                                        "-webkit-linear-gradient(" + deg + "deg, " + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )" : 
-                                                                                                        "-webkit-radial-gradient(" + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )"}}>
+        <div className="w-100 d-flex align-items-center justify-content-center flex-column" style={{ height: "100vh", background: gradient, background: "-moz-" + gradient, background: "-webkit-" + gradient}}>
             <div className="w-100 d-flex align-items-center justify-content-center gap-3 mb-3" >
                 <Colors key={colorsList[0].id} colorsList={colorsList[0]} colorsListComplet={colorsList} setcolorsList={setcolorsList} id={colorsList[0].id}/>
                 <Colors key={colorsList[1].id} colorsList={colorsList[1]} colorsListComplet={colorsList} setcolorsList={setcolorsList} id={colorsList[1].id}/>
@@ -68,6 +71,17 @@ export default function Gradient() {
                 <button className="btn btn-secondary"
                         onClick={() => settype(type ? false : true)}
                 >{type ? "radial" : "linear"}</button>
+            </div>
+            <h1>Code CSS</h1>
+            
+            <div id="alert" className={`alert alert-success w-100 text-center fade-in-down   ${alert ?"opacity-100" :"opacity-0"}`} style={{transition:"all .4s"}} >
+                code copié.
+            </div>
+            <button className="btn w-100 h-25" onClick={e => copieCode(e) }>
+                {gradient}
+            </button>
+            <div>
+
             </div>
         </div>
     )

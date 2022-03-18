@@ -15,10 +15,10 @@ export default function Colors({colorsList,colorsListComplet, setcolorsList, id}
 
   return (
     <div className="d-flex flex-column justify-content-center gap-2">
-      <label htmlFor="head">Breackpoint {colorsList.id}</label>
-      <input className="w-100 form-control" type="color" id="head" name="head"
+      <input className="p-1 form-control" type="color" id="head" name="head"
              value={colorsList.hexa} 
              onChange={e => (changeColor(e))}
+             style={{height:"50px", width: "50px"}}
       />
     </div>  
   )
