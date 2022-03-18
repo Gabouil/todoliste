@@ -2,9 +2,9 @@ import React, { Component, useEffect, useState } from "react"
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID"
 
 
-import Card from '../Component/Card'
-import NewCard from '../Component/Form/NewCard'
-import PreviewNewCard from "../Component/Preview/PreviewNewCard"
+import Card from '../Component/TodoList/Card'
+import NewCard from '../Component/TodoList/Form/NewCard'
+import PreviewNewCard from "../Component/TodoList/Preview/PreviewNewCard"
 
 
 export default function TodoList() {
