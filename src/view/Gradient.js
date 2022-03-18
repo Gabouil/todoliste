@@ -36,21 +36,15 @@ export default function Gradient() {
 
 
     return(
-        <div    className="w-100 d-flex align-items-center justify-content-center flex-column" style={{height: "100vh",
-        // c'est pas beau mais ça marche bien sorry pour les yeux :D
+        <div    className="w-100 d-flex align-items-center justify-content-center flex-column" style={{ height: "100vh",
                                                                                                         background: type ?
-                                                                                                        "linear-gradient(" + deg + "deg, " + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )" 
-                                                                                                        : 
+                                                                                                        "linear-gradient(" + deg + "deg, " + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )" :
                                                                                                         "radial-gradient(" + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )", 
-
                                                                                                         background: type ?
-                                                                                                        "-moz-linear-gradient(" + deg + "deg, " + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )" 
-                                                                                                        : 
+                                                                                                        "-moz-linear-gradient(" + deg + "deg, " + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )" :
                                                                                                         "-moz-radial-gradient(" + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )",
-
                                                                                                         background: type ?
-                                                                                                        "-webkit-linear-gradient(" + deg + "deg, " + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )" 
-                                                                                                        : 
+                                                                                                        "-webkit-linear-gradient(" + deg + "deg, " + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )" : 
                                                                                                         "-webkit-radial-gradient(" + colorsList[0].hexa + " , " + colorsList[1].hexa + " , " + colorsList[2].hexa + " )"}}>
             <div className="w-100 d-flex align-items-center justify-content-center gap-3 mb-3" >
                 <Colors key={colorsList[0].id} colorsList={colorsList[0]} colorsListComplet={colorsList} setcolorsList={setcolorsList} id={colorsList[0].id}/>
