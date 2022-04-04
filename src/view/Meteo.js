@@ -7,10 +7,6 @@ function Meteo() {
   const [temperature, setTemperature] = useState(0);
   const [cityName, setCityName] = useState("");
   const [link, setlink] = useState("");
-
-  const savePositionToState = (position) => {
-
-  };
   
 
   const fetchWeather = async () => {
@@ -28,13 +24,9 @@ function Meteo() {
       setLatitude(json.coord.lat)
       // console.log(json);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     }
   };
-
-  useEffect(() => {
-    fetchWeather();
-  }, [latitude, longitude]);
 
   return (
     <>
@@ -45,8 +37,10 @@ function Meteo() {
           onChange={e => (setCityName(e.target.value), fetchWeather())}
           className="form-control mb-2"
         />
+        {/* <RechercheVile cityName={cityName} setCityName={setCityName()} fetchWeather={fetchWeather} /> */}
+        {/* je ne sais pas pourquoi mais il me sort une boucle infini qui se lance quand je ne met pas le input ici */}
       <div className="meteo">
-        <div className="meteo__container">
+        <div className="app-container d-flex align-items-center justify-content-around flex-column text-center">
           <h1>{cityName}</h1>
           <h2>{temperature}ºC</h2>
           <h2>{weather}</h2>
